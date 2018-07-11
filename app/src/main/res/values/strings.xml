@@ -1,0 +1,16 @@
+<resources>
+    <string name="app_name">Admin - Things in the City</string>
+    <string name="name_of_the_place">Name of the place</string>
+    <string name="about_the_place">About the place</string>
+    <string name="location">Location</string>
+    <string name="tags">Tags</string>
+    <string name="category">Category</string>
+    <string name="photo">PHOTO</string>
+    <string name="close_button">CLOSE</string>
+    <string name="place_image">Place Image</string>
+    <string name="add_place">ADD PLACE</string>
+    <string name="prev">PREV</string>
+    <string name="next">NEXT</string>
+    <string name="city">City</string>
+    <string name="website">Website</string>
+</resources>
