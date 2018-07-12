@@ -1,35 +1,22 @@
 {
   "project_info": {
-    "project_number": "88416559767",
-    "firebase_url": "https://things-in-city.firebaseio.com",
-    "project_id": "things-in-city",
-    "storage_bucket": "things-in-city.appspot.com"
+    "project_number": "984814225177",
+    "firebase_url": "https://things-in-a-city.firebaseio.com",
+    "project_id": "things-in-a-city",
+    "storage_bucket": "things-in-a-city.appspot.com"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:88416559767:android:ed80e0a979d2214b",
+        "mobilesdk_app_id": "1:984814225177:android:ed80e0a979d2214b",
         "android_client_info": {
           "package_name": "com.example.things_in_city.admin"
         }
       },
-      "oauth_client": [
-        {
-          "client_id": "88416559767-8eu3rsr22i1t0erqqe9dlrnkd53im2pa.apps.googleusercontent.com",
-          "client_type": 1,
-          "android_info": {
-            "package_name": "com.example.things_in_city.admin",
-            "certificate_hash": "43216d22fecf7c389df3946120da778db385b5d3"
-          }
-        },
-        {
-          "client_id": "88416559767-e6ns81cbhsvlf3uhlasdbsoef9lsj3qp.apps.googleusercontent.com",
-          "client_type": 3
-        }
-      ],
+      "oauth_client": [],
       "api_key": [
         {
-          "current_key": "AIzaSyDYW3WPFUUN2L8n6A8lS3itG5JZCaP80Jo"
+          "current_key": "AIzaSyBC5CEyi1l0FOSsK4sO_IV382aP0EYPpoQ"
         }
       ],
       "services": {
@@ -37,13 +24,8 @@
           "status": 1
         },
         "appinvite_service": {
-          "status": 2,
-          "other_platform_oauth_client": [
-            {
-              "client_id": "88416559767-e6ns81cbhsvlf3uhlasdbsoef9lsj3qp.apps.googleusercontent.com",
-              "client_type": 3
-            }
-          ]
+          "status": 1,
+          "other_platform_oauth_client": []
         },
         "ads_service": {
           "status": 2
@@ -52,28 +34,15 @@
     },
     {
       "client_info": {
-        "mobilesdk_app_id": "1:88416559767:android:853537738b0d098c",
+        "mobilesdk_app_id": "1:984814225177:android:1cef5755c19a6967",
         "android_client_info": {
-          "package_name": "com.example.tronku.location"
+          "package_name": "thingsincities.com.thingsincities"
         }
       },
-      "oauth_client": [
-        {
-          "client_id": "88416559767-lonhtl2iqk745kgl3taj65t0nrbno379.apps.googleusercontent.com",
-          "client_type": 1,
-          "android_info": {
-            "package_name": "com.example.tronku.location",
-            "certificate_hash": "43216d22fecf7c389df3946120da778db385b5d3"
-          }
-        },
-        {
-          "client_id": "88416559767-e6ns81cbhsvlf3uhlasdbsoef9lsj3qp.apps.googleusercontent.com",
-          "client_type": 3
-        }
-      ],
+      "oauth_client": [],
       "api_key": [
         {
-          "current_key": "AIzaSyDYW3WPFUUN2L8n6A8lS3itG5JZCaP80Jo"
+          "current_key": "AIzaSyBC5CEyi1l0FOSsK4sO_IV382aP0EYPpoQ"
         }
       ],
       "services": {
@@ -81,13 +50,8 @@
           "status": 1
         },
         "appinvite_service": {
-          "status": 2,
-          "other_platform_oauth_client": [
-            {
-              "client_id": "88416559767-e6ns81cbhsvlf3uhlasdbsoef9lsj3qp.apps.googleusercontent.com",
-              "client_type": 3
-            }
-          ]
+          "status": 1,
+          "other_platform_oauth_client": []
         },
         "ads_service": {
           "status": 2
