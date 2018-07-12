@@ -11,6 +11,7 @@ import android.os.Bundle;
 import android.support.v7.widget.CardView;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.EditText;
@@ -54,7 +55,9 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
     private EditText name, about, tags, city, weburl, category;
     private List<Uri> imageUriList = new ArrayList<>();
     private Uri imageUri = null;
-    private Map<String, ArrayList<String>> cities = new HashMap<>();
+    private Map<String, ArrayList<String>> cities;
+    private Map<String, Object> data = new HashMap<>();
+    private String placeKey;
 
     //Firebase references
     private FirebaseDatabase firebaseDatabase;
@@ -82,6 +85,7 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
         cityReference = firebaseDatabase.getReference();
         placeReference = firebaseDatabase.getReference();
         storageReference = firebaseStorage.getReference();
+
 
         if (savedInstanceState != null) {
             imageUriList = savedInstanceState.getParcelableArrayList("uri");
@@ -139,6 +143,7 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
                 autocompleteFragment.setText("");
             }
         });
+        addData();
     }
 
     @Override
@@ -204,20 +209,67 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
         placeReference.updateChildren(values);
 
         //cities
+        collectData(getCitiesData());
+        if(cities == null)
+            cities = new HashMap<>();
         ArrayList<String> pushIds;
-        boolean city_present = false;
+        boolean city_present;
         if (cities.containsKey(cityName)) {
             pushIds = cities.get(cityName);
             city_present = true;
+            Log.d("present?","true");
         } else {
             pushIds = new ArrayList<>();
             city_present = false;
+            Log.d("present?","false");
         }
         pushIds.add(key);
         cities.put(cityName, pushIds);
 
-        setCityData(cityName, city_present);
-        setDownloadUri(key);
+        if(cityName.length()==0)
+            removeNullData(key);
+        else{
+            setCityData(cityName, city_present);
+            setDownloadUri(key);
+        }
+    }
+
+    private void removeNullData(String key) {
+        placeReference.child("places").child(key).removeValue();
+    }
+
+    private Map<String, Object> getCitiesData() {
+        DatabaseReference ref = firebaseDatabase.getReference().child("cities");
+        ref.addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                if(dataSnapshot.getValue() != null){
+                    data = (Map<String, Object>)dataSnapshot.getValue();
+                }
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+
+            }
+        });
+        return data;
+    }
+
+    private void collectData(Map<String, Object> city){
+        String cityName;
+        for(Map.Entry<String, Object> entry : city.entrySet()){
+            Map singleCity = (Map)entry.getValue();
+            cityName = (String)singleCity.get("title");
+            ArrayList<String> placeList = new ArrayList<>();
+            Log.d("city", cityName);
+            Map<String, String> place = (Map<String, String>)singleCity.get("places");
+            for(Map.Entry<String, String> singleEntry : place.entrySet()){
+                placeList.add(singleEntry.getValue());
+                Log.d("place", singleEntry.getValue());
+            }
+            cities.put(cityName, placeList);
+        }
     }
 
     public void setDownloadUri(final String key) {
@@ -295,7 +347,7 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
         String key;
         final ArrayList<String> cityPlaces = cities.get(cityName);
 
-        if (city_present) {
+        if(city_present){
             Query cityQuery = cityReference.child("cities").orderByChild("title").equalTo(cityName);
             cityQuery.addListenerForSingleValueEvent(new ValueEventListener() {
                 @Override
@@ -313,7 +365,9 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
 
                 }
             });
-        } else {
+        }
+
+        else {
             key = cityReference.child("cities").push().getKey();
             DatabaseReference cityData = firebaseDatabase.getReference().child(key);
 
@@ -323,7 +377,7 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
             Map<String, Object> places = new HashMap<>();
 
             for (int i = 0; i < cityPlaces.size(); i++) {
-                String placeKey = cityData.child("places").push().getKey();
+                placeKey = cityData.child("places").push().getKey();
                 places.put("/cities/" + key + "/places/" + placeKey, cityPlaces.get(i));
                 cityReference.updateChildren(places);
             }
