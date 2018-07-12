@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">Admin - Things in the City</string>
+    <string name="app_name">TIC Admin</string>
     <string name="name_of_the_place">Name of the place</string>
     <string name="about_the_place">About the place</string>
     <string name="location">Location</string>
